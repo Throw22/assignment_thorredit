@@ -13,11 +13,11 @@
 		<p>{{comment.body}}</p>
 		<p><a href="#">Comment</a></p>
     <ul>
-      {{#each comment.comments}}
+      {{#each comment.comments as |nested|}}
       <li>
-        <p>{{this}}</p>
-    		<p>{{this.author.username}} said:</p>
-    		<p>{{this.body}}</p>
+        <p>{{nested}}</p>
+    		<p>{{nested.author.username}} said:</p>
+    		<p>{{nested.body}}</p>
     		<p><a href="#">Comment</a></p>
       </li>
       {{/each}}

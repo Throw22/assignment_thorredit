@@ -21,16 +21,24 @@ router.get('/', (req, res) => {
 // ----------------------------------------
 router.get('/:id', (req, res) => {
   Post.findById(req.params.id)
-    .populate('author')
-    .populate({ path: 'comments', populate: { path: 'author' } })
+    .populate('author') //Gets author name for post
     .populate({
-      path: 'comments',
-      populate: { path: 'comments', populate: { path: 'author' } }
+      path: 'comments', //Gets first level comment
+      populate: {
+        path: 'author', //Gets first level comment author
+        populate: { path: 'comments', populate: { path: 'author' } } //Get nested comment and author
+      }
     })
     .then(post => {
+      console.log(post);
       res.render('posts/show', { post });
     })
     .catch(e => res.status(500).send(e.stack));
+
+  //Gets author for first-level comments
+  // .populate(
+  //   { path: 'comments.comments', populate: { path: 'author' } } //Get comments of those comments (currently just ID)
+  // )
 });
 
 module.exports = router;
