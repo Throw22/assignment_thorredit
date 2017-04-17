@@ -12,6 +12,16 @@
 		<p>{{comment.author.username}} said:</p>
 		<p>{{comment.body}}</p>
 		<p><a href="#">Comment</a></p>
+    <ul>
+      {{#each comment.comments}}
+      <li>
+        <p>{{this}}</p>
+    		<p>{{this.author.username}} said:</p>
+    		<p>{{this.body}}</p>
+    		<p><a href="#">Comment</a></p>
+      </li>
+      {{/each}}
+    </ul>
 	</li>
 	{{/each}}
 </ul>

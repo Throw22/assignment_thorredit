@@ -22,7 +22,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Post.findById(req.params.id)
     .populate('author')
-    .populate('comments')
+    .populate({ path: 'comments', populate: { path: 'author' } })
+    .populate({
+      path: 'comments',
+      populate: { path: 'comments', populate: { path: 'author' } }
+    })
     .then(post => {
       res.render('posts/show', { post });
     })

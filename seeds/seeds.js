@@ -26,7 +26,7 @@ module.exports = () => {
   // ----------------------------------------
   console.log('Creating Users');
   var users = [];
-  for (let i = 0; i < MULTIPLIER * 2; i++) {
+  for (let i = 0; i < MULTIPLIER * 10; i++) {
     var user = new User({
       fname: 'Foo',
       lname: 'Bar',
@@ -45,7 +45,7 @@ module.exports = () => {
     var post = new Post({
       title: randomCommentableName('post'),
       body: randomCommentableName('body'),
-      author: users[0],
+      author: users[Math.floor(Math.random() * 10)],
       score: Math.floor(Math.random() * 100)
     });
     posts.push(post);
@@ -62,13 +62,24 @@ module.exports = () => {
     var user = users[1];
     var comment = new Comment({
       body: randomCommentableName('body'),
-      author: users[1],
-      score: Math.floor(Math.random() * 100)      
+      author: users[Math.floor(Math.random() * 10)],
+      score: Math.floor(Math.random() * 100)
     });
+
+    for (let i = 0; i < 2; i++) {
+      var nestedComment = new Comment({
+        body: randomCommentableName('body'),
+        author: users[Math.floor(Math.random() * 10)],
+        score: Math.floor(Math.random() * 100)
+      });
+      comment.comments.push(nestedComment);
+    }
+
     comments.push(comment);
     post.comments.push(comment);
   }
 
+  //post.comments.comments.push(comment);
   // ----------------------------------------
   // Ratings
   // ----------------------------------------
