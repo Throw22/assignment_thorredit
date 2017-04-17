@@ -20,7 +20,7 @@
       {{#each posts as |post| }}
         <tr>
           <td>
-            <a href="/posts/{{ post.id }}">Timestamp</a>
+            <a href="/posts/{{ post.id }}">{{ post.createdAt }}</a>
           </td>
           <td>
             <a href="/posts/{{ post.id }}">{{ post.title }}</a>
@@ -29,7 +29,7 @@
             <a href="/posts/{{ post.id }}">{{ post.body }}</a>
           </td>
           <td>
-            <a href="/posts/{{ post.id }}">{{ post.author }}</a>
+            <a href="/posts/{{ post.id }}">{{ post.author.username }}</a>
           </td>
         </tr>
       {{/each }}

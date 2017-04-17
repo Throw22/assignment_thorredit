@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var CommentableSchema = new Schema(
   {
     body: String,
+    score: Number,
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User'

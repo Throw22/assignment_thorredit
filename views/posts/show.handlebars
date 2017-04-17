@@ -1,9 +1,17 @@
-
-
 <header class="page-header">
-  <h1>Post: {{ post.title }}</h1>
+  <h1>{{ post.title }}</h1>
+  <p>by {{ post.author.username }}</p>
+  <p>{{ post.body }}</p>
+  <p><a href="#">Comment</a></p>
 </header>
 
-<body>
-  <p>{{post.body}}</p>
-</body>
+
+<ul>
+	{{#each post.comments as |comment|}}
+	<li>
+		<p>{{comment.author.username}} said:</p>
+		<p>{{comment.body}}</p>
+		<p><a href="#">Comment</a></p>
+	</li>
+	{{/each}}
+</ul>

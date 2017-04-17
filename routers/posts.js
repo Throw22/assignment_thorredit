@@ -9,6 +9,7 @@ var Post = mongoose.model('Post');
 // ----------------------------------------
 router.get('/', (req, res) => {
   Post.find({})
+    .populate('author')
     .then(posts => {
       res.render('posts/index', { posts });
     })
@@ -20,6 +21,8 @@ router.get('/', (req, res) => {
 // ----------------------------------------
 router.get('/:id', (req, res) => {
   Post.findById(req.params.id)
+    .populate('author')
+    .populate('comments')
     .then(post => {
       res.render('posts/show', { post });
     })

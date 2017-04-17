@@ -44,8 +44,9 @@ module.exports = () => {
   for (let i = 0; i < MULTIPLIER * 100; i++) {
     var post = new Post({
       title: randomCommentableName('post'),
-      body: randomCommentableName('body')
-      //author object:
+      body: randomCommentableName('body'),
+      author: users[0],
+      score: Math.floor(Math.random() * 100)
     });
     posts.push(post);
   }
@@ -59,7 +60,12 @@ module.exports = () => {
   for (let i = 0; i < MULTIPLIER * 100; i++) {
     var post = posts[i % posts.length];
     var user = users[1];
-    var comment = new Comment();
+    var comment = new Comment({
+      body: randomCommentableName('body'),
+      author: users[1],
+      score: Math.floor(Math.random() * 100)      
+    });
+    comments.push(comment);
     post.comments.push(comment);
   }
 
