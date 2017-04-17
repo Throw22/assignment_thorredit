@@ -17,5 +17,18 @@ router.get('/', (req, res) => {
     .catch((e) => res.status(500).send(e.stack));
 });
 
+// ----------------------------------------
+// Show
+// ----------------------------------------
+router.get('/:id', (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      res.render('users/show', { user });
+    })
+    .catch((e) => res.status(500).send(e.stack));
+});
+
+
+
 
 module.exports = router;
