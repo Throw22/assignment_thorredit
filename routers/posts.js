@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var models = require('./../models');
-var User = mongoose.model('User');
+var Post = mongoose.model('Post');
 
 // ----------------------------------------
 // Index
 // ----------------------------------------
 router.get('/', (req, res) => {
-  User.find({})
-    .then(users => {
-      res.render('users/index', { users });
+  Post.find({})
+    .then(posts => {
+      res.render('posts/index', { posts });
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -19,9 +19,9 @@ router.get('/', (req, res) => {
 // Show
 // ----------------------------------------
 router.get('/:id', (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      res.render('users/show', { user });
+  Post.findById(req.params.id)
+    .then(post => {
+      res.render('posts/show', { post });
     })
     .catch(e => res.status(500).send(e.stack));
 });

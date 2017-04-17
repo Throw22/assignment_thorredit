@@ -100,8 +100,8 @@ app.use('/', sessionsRouter);
 var usersRouter = require('./routers/users');
 app.use('/users', usersRouter);
 
-
-
+var postsRouter = require('./routers/posts');
+app.use('/posts', postsRouter);
 
 // ----------------------------------------
 // Template Engine

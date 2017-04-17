@@ -43,7 +43,9 @@ module.exports = () => {
   var posts = [];
   for (let i = 0; i < MULTIPLIER * 100; i++) {
     var post = new Post({
-      name: randomCommentableName('post')
+      title: randomCommentableName('post'),
+      body: randomCommentableName('body')
+      //author object:
     });
     posts.push(post);
   }
@@ -91,12 +93,7 @@ module.exports = () => {
   // ----------------------------------------
   console.log('Saving...');
   var promises = [];
-  [
-    users
-    //hotels,
-    //motels,
-    //ratings
-  ].forEach(collection => {
+  [users, posts, comments].forEach(collection => {
     collection.forEach(model => {
       promises.push(model.save());
     });
