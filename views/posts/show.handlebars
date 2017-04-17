@@ -13,13 +13,17 @@
 		<p>{{comment.body}}</p>
 		<p><a href="/posts/{{../post._id}}/newcomment/{{comment._id}}">Comment</a></p>
     <ul class="list-group">
+      {{#if comment.comments.length}}
       {{#each comment.comments as |nested|}}
       <li class="list-group-item">
-        <p>{{nested}}</p>
     		<p>{{nested.author.username}} said:</p>
     		<p>{{nested.body}}</p>
       </li>
       {{/each}}
+
+      {{else}}
+      <p>No nested comment</p>
+      {{/if}}
     </ul>
 	</li>
 	{{/each}}

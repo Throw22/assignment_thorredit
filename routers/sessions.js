@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var models = require('./../models');
-//var User = mongoose.model('User');
+var User = mongoose.model('User');
 
 module.exports = app => {
   // Auth
@@ -22,7 +22,6 @@ module.exports = app => {
   // New
   var onNew = (req, res) => {
     if (req.session.currentUser) {
-      //res.redirect('/users');
       res.redirect('/users');
     } else {
       res.render('sessions/new');
@@ -31,38 +30,27 @@ module.exports = app => {
   router.get('/', onNew);
   router.get('/login', onNew);
 
-  router.post('/sessions', (req, res) => {
-    let username = req.body.username;
-    let email = req.body.email;
-
-    req.session.currentUser = {
-      username: username,
-      email: email
-    };
-
-    res.redirect('/');
-  });
   // Create
-  // router.post('/sessions', (req, res) => {
-  //   User.findOne({
-  //     username: req.body.username,
-  //     email: req.body.email
-  //   })
-  //     .then(user => {
-  //       if (user) {
-  //         req.session.currentUser = {
-  //           username: user.username,
-  //           email: user.email,
-  //           id: user.id,
-  //           _id: user._id
-  //         };
-  //         res.redirect('/users');
-  //       } else {
-  //         res.redirect('/login');
-  //       }
-  //     })
-  //     .catch(e => res.status(500).send(e.stack));
-  // });
+  router.post('/sessions', (req, res) => {
+    User.findOne({
+      username: req.body.username,
+      email: req.body.email
+    })
+      .then(user => {
+        if (user) {
+          req.session.currentUser = {
+            username: user.username,
+            email: user.email,
+            id: user.id,
+            _id: user._id
+          };
+          res.redirect('/users');
+        } else {
+          res.redirect('/login');
+        }
+      })
+      .catch(e => res.status(500).send(e.stack));
+  });
 
   // Destroy
   var onDestroy = (req, res) => {

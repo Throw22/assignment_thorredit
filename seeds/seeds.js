@@ -57,6 +57,8 @@ module.exports = () => {
 
   console.log('Creating Comments for Posts');
   var comments = [];
+  var nestedComments = [];
+
   for (let i = 0; i < MULTIPLIER * 100; i++) {
     var post = posts[i % posts.length];
     var user = users[1];
@@ -72,6 +74,7 @@ module.exports = () => {
         author: users[Math.floor(Math.random() * 10)],
         score: Math.floor(Math.random() * 100)
       });
+      nestedComments.push(nestedComment);
       comment.comments.push(nestedComment);
     }
 
@@ -110,7 +113,7 @@ module.exports = () => {
   // ----------------------------------------
   console.log('Saving...');
   var promises = [];
-  [users, posts, comments].forEach(collection => {
+  [users, posts, comments, nestedComments].forEach(collection => {
     collection.forEach(model => {
       promises.push(model.save());
     });
