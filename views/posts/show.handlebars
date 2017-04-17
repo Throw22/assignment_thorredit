@@ -2,23 +2,22 @@
   <h1>{{ post.title }}</h1>
   <p>by {{ post.author.username }}</p>
   <p>{{ post.body }}</p>
-  <p><a href="#">Comment</a></p>
+  <p><a href="/posts/{{post._id}}/newcomment/{{post._id}}">Comment</a></p>
 </header>
 
 
-<ul>
+<ul class="list-group">
 	{{#each post.comments as |comment|}}
-	<li>
+	<li class="list-group-item">
 		<p>{{comment.author.username}} said:</p>
 		<p>{{comment.body}}</p>
-		<p><a href="#">Comment</a></p>
-    <ul>
+		<p><a href="/posts/{{../post._id}}/newcomment/{{comment._id}}">Comment</a></p>
+    <ul class="list-group">
       {{#each comment.comments as |nested|}}
-      <li>
+      <li class="list-group-item">
         <p>{{nested}}</p>
     		<p>{{nested.author.username}} said:</p>
     		<p>{{nested.body}}</p>
-    		<p><a href="#">Comment</a></p>
       </li>
       {{/each}}
     </ul>
