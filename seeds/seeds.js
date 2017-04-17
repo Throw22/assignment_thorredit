@@ -7,19 +7,18 @@ function randomRating() {
   return Math.floor(Math.random() * 6);
 }
 
-//
-// function randomLodgingName(type) {
-//   type = voca.titleCase(type);
-//   var randomWord = faker.random.word();
-//   randomWord = voca.titleCase(randomWord);
-//   var names = [
-//     `The ${ randomWord } Inn`,
-//     `${ type } ${ randomWord }`,
-//     `${ randomWord } ${ type }`
-//   ];
-//   var index = Math.floor(Math.random() * names.length);
-//   return names[index];
-// }
+function randomCommentableName(type) {
+  type = voca.titleCase(type);
+  var randomWord = faker.random.word();
+  randomWord = voca.titleCase(randomWord);
+  var names = [
+    `${randomWord} is awesome`,
+    `${type} ${randomWord}`,
+    `${randomWord} ${type}`
+  ];
+  var index = Math.floor(Math.random() * names.length);
+  return names[index];
+}
 
 module.exports = () => {
   // ----------------------------------------
@@ -38,28 +37,29 @@ module.exports = () => {
   }
 
   // ----------------------------------------
-  // Hotels
+  // Posts
   // ----------------------------------------
-  // console.log('Creating Hotels');
-  // var hotels = [];
-  // for (let i = 0; i < MULTIPLIER * 100; i++) {
-  //   var hotel = new Hotel({
-  //     name: randomLodgingName('hotel')
-  //   });
-  //   hotels.push(hotel);
-  // }
+  console.log('Creating Posts');
+  var posts = [];
+  for (let i = 0; i < MULTIPLIER * 100; i++) {
+    var post = new Post({
+      name: randomCommentableName('post')
+    });
+    posts.push(post);
+  }
 
   // ----------------------------------------
-  // Motels
+  // Comments
   // ----------------------------------------
-  // console.log('Creating Motels');
-  // var motels = [];
-  // for (let i = 0; i < MULTIPLIER * 100; i++) {
-  //   var motel = new Motel({
-  //     name: randomLodgingName('motel')
-  //   });
-  //   motels.push(motel);
-  // }
+
+  console.log('Creating Comments for Posts');
+  var comments = [];
+  for (let i = 0; i < MULTIPLIER * 100; i++) {
+    var post = posts[i % posts.length];
+    var user = users[1];
+    var comment = new Comment();
+    post.comments.push(comment);
+  }
 
   // ----------------------------------------
   // Ratings
@@ -85,7 +85,6 @@ module.exports = () => {
   //   ratings.push(hotelRating);
   //   ratings.push(motelRating);
   // }
-  //
 
   // ----------------------------------------
   // Finish
