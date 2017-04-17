@@ -97,9 +97,12 @@ app.use((req, res, next) => {
 var sessionsRouter = require('./routers/sessions')(app);
 app.use('/', sessionsRouter);
 
-app.get('/startpage', (req, res) => {
-  res.end('Welcome to thoredit!');
-});
+var usersRouter = require('./routers/users');
+app.use('/users', usersRouter);
+
+
+
+
 // ----------------------------------------
 // Template Engine
 // ----------------------------------------

@@ -23,7 +23,7 @@ module.exports = app => {
   var onNew = (req, res) => {
     if (req.session.currentUser) {
       //res.redirect('/users');
-      res.redirect('/startpage');
+      res.redirect('/users');
     } else {
       res.render('sessions/new');
     }
